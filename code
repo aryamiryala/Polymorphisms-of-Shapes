@@ -1,0 +1,250 @@
+public class Shape{
+    public final int NUMBER_OF_SIDES;
+    public Shape(){
+        NUMBER_OF_SIDES = 4;
+    }
+    public Shape(int side){
+        NUMBER_OF_SIDES = side;
+    }
+    public static double Area(){
+        return 0;
+    }
+    public double area(Circle c){
+        return 3.14*(c.getRadius()*c.getRadius());
+    }
+    public double area(Rectangle r){
+        return r.getLength()*r.getWidth();
+    }
+    public double area(Triangle t){
+        return 0.5 * t.getBase()*t.getHeight();
+    }
+    public static double Perimeter(){
+        return 0;
+    }
+    public double perimeter(Circle c){
+        return 2 * 3.14 * c.getRadius();
+    }
+    public double perimeter(Rectangle r){
+        return (2*r.getLength()) + (2*r.getWidth());
+    }
+    public double perimeter(Triangle t){
+        return t.getSideA() + t.getSideB()+t.getSideC();
+    }
+}
+
+public class Circle extends Shape{
+    private double radius;
+    Point center = new Point();
+    public Circle(){
+        super(1);
+        radius = 0;
+        center = new Point(0,0);
+    }
+    public Circle(double r, Point c){
+        super(1);
+        radius = r;
+        center = c;
+    }
+    public double getRadius(){
+        return radius;
+    }
+    
+    public void setRadius(double a){
+        radius = a;
+    }
+    public void setCenter(Point c){
+        center = c;
+    }
+   
+    public String toStr(){
+        return "Circle with 1 side, radius =  " + radius + " and center = ( " + center.getX() + "," + center.getY() + ")"; 
+    }
+}
+
+public class Rectangle extends Shape{
+    private double length;
+    private double width;
+    public Rectangle(){
+        super(4);
+        length = 0;
+        width = 0;
+    }
+    public Rectangle(double l, double w){
+        super(4);
+        length = 1;
+        width = w;
+        
+    }
+    public double getLength(){
+        return length;
+    }
+    public double getWidth(){
+        return width;
+    }
+    public void setLength(double a){
+        length = a;
+    }
+    public void setWidth(double a){
+        width = a;
+    }
+    public String toStr(){
+        return "Rectangle with 4 sides, length = " + length + " and width = " + width + "."; 
+    }
+}
+
+public class Triangle extends Shape{
+    private double sideA;
+    private double sideB;
+    private double sideC;
+    private double base;
+    private double height;
+    public Triangle(){
+        super(3);
+        sideA = 0;
+        sideB = 0;
+        sideC = 0;
+        base = 0;
+        height = 0;
+    }
+    public Triangle(double sa, double sb, double sc, double b, double h){
+        super(3);
+        sideA = sa;
+        sideB = sb;
+        sideC = sc;
+        base = b;
+        height = h;
+        
+    }
+    public double getSideA(){
+        return sideA;
+    }
+    public double getSideB(){
+        return sideB;
+    }
+    public double getSideC(){
+        return sideC;
+    }
+    public double getBase(){
+        return base;
+    }
+    public double getHeight(){
+        return height;
+    }
+    public void setSideA(double a){
+        
+        sideA = a;
+    }
+    public void setSideB(double a){
+        sideB=a;
+    }
+    public void setSideC(double a){
+        sideC=a;
+    }
+    public void setBase(double a){
+        base =a;
+    }
+    public void setHeight(double a){
+        height = a;
+    }
+    public String toStr(){
+        return "Triangle with 3 sides, side lengths = " + sideA + "," + sideB+ "," + sideC + ", base = " + base + ", height = "+ height;
+    }
+  
+}
+
+public class Point{
+    private double x;
+    private double y;
+    
+    public Point(){
+        x=0;
+        y=0;
+    }
+    public Point(double x1, double y1){
+        x = x1;
+        y = y1;
+    }
+    public double getX(){
+        return x;
+    }
+    public double getY(){
+        return y;
+    }
+    public void setX(double a){
+        x = a;
+    }
+    public void setY(double a){
+        y= a;
+    }
+}
+import java.util.Scanner;
+public class Main{
+    public static void main(String[]args){
+        Shape[]shapes = new Shape[3];
+        for(int i = 0; i < 3; i++){
+            System.out.println("Enter a number of sides from the choices below.");
+            System.out.println("1 side - Circle");
+            System.out.println("3 sides - Triangle");
+            System.out.println("4 sides - Rectangle");
+            Scanner choice = new Scanner(System.in);
+            String a = choice.next();
+            if(a.compareTo("1") == 0){
+                System.out.print("Enter the x coordinate of the center of the Circle \n-");
+                double xCenter = Double.parseDouble(choice.next());
+                System.out.print("Enter the y coordinate of the center\n-");
+                double yCenter = Double.parseDouble(choice.next());
+                Point p = new Point(xCenter, yCenter);
+                System.out.print("Now enter the radius\n-");
+                double radius = Double.parseDouble(choice.next());
+                Shape c = new Circle(radius, p);
+                shapes[i] = c;
+                
+            }
+            else if(a.compareTo("3")==0){
+                System.out.print("Enter a side length A for the Triangle\n-");
+                double sideA = Double.parseDouble(choice.next());
+                System.out.print("Enter a side length B\n-");
+                double sideB = Double.parseDouble(choice.next());
+                System.out.print("Enter a side length C\n-");
+                double sideC = Double.parseDouble(choice.next());
+                System.out.print("Enter the base length\n-");
+                double base = Double.parseDouble(choice.next());
+                System.out.print("Enter the height length\n-");
+                double height = Double.parseDouble(choice.next());
+                Shape t = new Triangle(sideA, sideB, sideC, base, height);
+                shapes[i] = t;
+                
+            }
+            else if(a.compareTo("4")==0){
+                System.out.print("Enter length for rectangle\n-");
+                double length = Double.parseDouble(choice.next());
+                System.out.print("Enter a width\n-");
+                double width = Double.parseDouble(choice.next());
+                Shape r = new Rectangle(length, width);
+                shapes[i] = r;
+                
+            }
+        }
+        for(int i = 0; i < 3; i++){
+            if(shapes[i].NUMBER_OF_SIDES==1){
+                System.out.print(((Circle)shapes[i]).toString());
+                System.out.print(((Circle)shapes[i]).perimeter((Circle)shapes[i]));
+                System.out.print(((Circle)shapes[i]).area((Circle)shapes[i]));
+            }
+            else if(shapes[i].NUMBER_OF_SIDES==3){
+                System.out.print(((Triangle)shapes[i]).toStr());
+                System.out.print(((Triangle)shapes[i]).perimeter((Triangle)shapes[i]));
+                System.out.print(((Triangle)shapes[i]).area((Triangle)shapes[i]));
+                
+                
+            }
+            else if(shapes[i].NUMBER_OF_SIDES==4){
+                System.out.print(((Rectangle)shapes[i]).toStr());
+                System.out.print(((Rectangle)shapes[i]).perimeter((Rectangle)shapes[i]));
+                System.out.print(((Rectangle)shapes[i]).area((Rectangle)shapes[i]));
+                
+            }
+        }
+    }
+}
+
